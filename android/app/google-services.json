@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "863257218129",
+    "project_id": "todo-sprint-434207",
+    "storage_bucket": "todo-sprint-434207.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:863257218129:android:697c0dd425aad1f8cebc70",
+        "android_client_info": {
+          "package_name": "com.rsr.todosprint"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAM50OAz3qYqd954FxHOvguBk6UjjNePsc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

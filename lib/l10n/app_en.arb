@@ -1,0 +1,13 @@
+{
+    "@@locale": "en",
+    "@_TITLES": "<-----------------TITLES----------------->",
+    "appTitle": "TodoSprint",
+    "@_SUBTITLES": "<-----------------SUBTITLES----------------->",
+    "@_LABELS": "<-----------------LABELS----------------->",
+    "okay": "Okay",
+    "retry": "Retry",
+    "@_HINTS": "<-----------------HINTS----------------->",
+    "@_MESSAGES": "<-----------------MESSAGES----------------->",
+    "someErrorOccured": "Some Error Occured!"
+  }
+  
