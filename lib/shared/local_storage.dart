@@ -1,5 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import '../models/others/settings_model.dart';
+import '../models/settings_model.dart';
 
 final localStorage = LocalStorage.value;
 

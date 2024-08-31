@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../services/navigation_service.dart';
-import '../views.dart/landing_view.dart';
+import '../views/landing_view.dart';
 import 'routes.dart';
 
 final GoRouter routing = GoRouter(
