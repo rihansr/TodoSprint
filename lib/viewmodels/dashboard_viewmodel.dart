@@ -1,5 +1,12 @@
-import 'base_viewmodel.dart';
+import 'package:flutter/foundation.dart';
 
-class DashboardViewModel extends BaseViewModel {
+class DashboardViewModel extends ChangeNotifier {
+  
   DashboardViewModel();
+
+  int _selectedTab = 0;
+  int get selectedTab => _selectedTab;
+  set selectedTab(int tab) => this
+    .._selectedTab = tab
+    ..notifyListeners();
 }
