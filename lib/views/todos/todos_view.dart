@@ -1,51 +1,78 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
+import '../../models/todo_model.dart';
 import '../../viewmodels/todos_viewmodel.dart';
-import '../../widgets/base_widget.dart';
-import 'components/add_list_button.dart';
-import 'components/title_bar.dart';
-import 'components/todo_item.dart';
+import 'components/todo_indicator.dart';
+import 'components/todo_page_view.dart';
 
 class TodosView extends StatelessWidget {
-  const TodosView({super.key});
+  final Todo todo;
+  final int index;
+  const TodosView({
+    super.key,
+    required this.todo,
+    required this.index,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return BaseWidget<TodosViewModel>(
-      model: Provider.of(context),
-      onInit: (controller) => controller.fetchTodos(),
-      builder: (context, controller, _) => Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const TitleBar(),
-          const Spacer(flex: 1),
-          AddListButton(
-            onTap: () => controller.addTodo(),
-          ),
-          const Spacer(flex: 44),
-          Expanded(
-            flex: 5,
-            child: GridView.builder(
-              physics: const BouncingScrollPhysics(),
-              padding: const EdgeInsets.symmetric(horizontal: 26),
-              scrollDirection: Axis.horizontal,
-              itemCount: controller.todos.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 1,
-                childAspectRatio: 1.75,
-              ),
-              itemBuilder: (context, i) {
-                final todo = controller.todos[i];
-                return TodoItem(
-                  key: ValueKey(todo.id),
-                  todo: todo,
-                  onSelected: (item) => {},
-                );
-              },
+    final theme = Theme.of(context);
+    return ChangeNotifierProvider<TodosViewModel>.value(
+      value: TodosViewModel(context, todo: todo, index: index),
+      child: Consumer<TodosViewModel>(
+        builder: (context, controller, _) => Scaffold(
+          appBar: AppBar(
+            leading: const Icon(
+              Iconsax.menu,
             ),
           ),
-          const Spacer(),
-        ],
+          body: PageView.builder(
+            physics: const BouncingScrollPhysics(),
+            controller: controller.pageController,
+            itemCount: controller.todos.length,
+            onPageChanged: (i) => controller.index.value = i,
+            itemBuilder: (context, i) {
+              final todo = controller.todos[i];
+              return TodoPage(
+                key: PageStorageKey(todo.id),
+                todo: todo,
+              );
+            },
+          ),
+          bottomNavigationBar: SizedBox(
+            height: 72,
+            child: ValueListenableBuilder(
+                valueListenable: controller.index,
+                builder: (_, i, __) {
+                  final todo = controller.todos[i];
+                  return Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: TodoIndicator(
+                          todos: controller.todos,
+                          currentIndex: i,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 16),
+                        child: FloatingActionButton.small(
+                          heroTag: null,
+                          backgroundColor: todo.theme?.color,
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          onPressed: () {},
+                          child: const Icon(Iconsax.add),
+                        ),
+                      ),
+                    ],
+                  );
+                }),
+          ),
+        ),
       ),
     );
   }

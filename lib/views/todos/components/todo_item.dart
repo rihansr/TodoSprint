@@ -4,11 +4,13 @@ import 'task_item.dart';
 
 class TodoItem extends StatelessWidget {
   final Todo todo;
+  final int index;
   final Function(Todo item) onSelected;
 
   const TodoItem({
     super.key,
     required this.todo,
+    required this.index,
     required this.onSelected,
   });
 
@@ -16,12 +18,13 @@ class TodoItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Hero(
-      tag: todo.id,
-      child: InkWell(
-        onTap: () => onSelected.call(todo),
-        child: Card(
-          color: todo.theme?.color,
-          shadowColor: todo.theme?.color,
+      tag: "${todo.id}_$index",
+      child: Card(
+        color: todo.theme?.color,
+        shadowColor: todo.theme?.color,
+        child: InkWell(
+          onTap: () => onSelected.call(todo),
+          borderRadius: BorderRadius.circular(5),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -50,7 +53,11 @@ class TodoItem extends StatelessWidget {
                   itemCount: todo.tasks.length,
                   itemBuilder: (context, i) {
                     final task = todo.tasks[i];
-                    return TaskItem.small(key: ValueKey(i), task: task);
+                    return TaskItem.small(
+                      key: ValueKey(i),
+                      todo: todo,
+                      task: task,
+                    );
                   },
                 ),
               ),

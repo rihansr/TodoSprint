@@ -1,7 +1,7 @@
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 import '../viewmodels/dashboard_viewmodel.dart';
-import '../viewmodels/todos_viewmodel.dart';
+import '../viewmodels/home_viewmodel.dart';
 
 List<SingleChildWidget> providers = [
   ...independentService,
@@ -14,7 +14,7 @@ List<SingleChildWidget> universalService = [
   ChangeNotifierProvider<DashboardViewModel>(
     create: (context) => DashboardViewModel(),
   ),
-  ChangeNotifierProvider<TodosViewModel>(
-    create: (context) => TodosViewModel(),
+  ChangeNotifierProvider<HomeViewModel>(
+    create: (context) => HomeViewModel(),
   ),
 ];

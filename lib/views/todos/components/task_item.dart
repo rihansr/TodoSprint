@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:todo_sprint/shared/utils.dart';
 import '../../../models/task_model.dart';
+import '../../../models/todo_model.dart';
 
 class TaskItem extends StatelessWidget {
+  final Todo todo;
   final Task task;
   final Function(Task item)? onSelected;
   final bool _isSmaller;
 
   const TaskItem({
     super.key,
+    required this.todo,
     required this.task,
-    required this.onSelected,
+    this.onSelected,
   }) : _isSmaller = false;
 
   const TaskItem.small({
     super.key,
+    required this.todo,
     required this.task,
   })  : onSelected = null,
         _isSmaller = true;
@@ -26,6 +31,7 @@ class TaskItem extends StatelessWidget {
 
     return _isSmaller
         ? ListTile(
+            visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
             contentPadding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
             dense: true,
             minLeadingWidth: 0,
@@ -33,9 +39,7 @@ class TaskItem extends StatelessWidget {
               scale: 0.75,
               child: Checkbox(
                 value: task.isCompleted,
-                onChanged: (selected) => onSelected?.call(
-                  task.copyWith(isCompleted: selected ?? false),
-                ),
+                onChanged: (_) => {},
                 activeColor: Colors.white,
                 checkColor: theme.textTheme.labelSmall?.color,
                 side: const BorderSide(color: Colors.white),
@@ -55,20 +59,42 @@ class TaskItem extends StatelessWidget {
               ),
             ),
           )
-        : CheckboxListTile(
-            controlAffinity: ListTileControlAffinity.leading,
-            value: task.isCompleted,
-            onChanged: (selected) => onSelected?.call(
-              task.copyWith(isCompleted: selected ?? false),
+        : ListTile(
+            contentPadding: const EdgeInsets.fromLTRB(32, 0, 16, 0),
+            onTap: () => onSelected?.call(
+              task.copyWith(isCompleted: !task.isCompleted),
             ),
+            leading: Align(
+              alignment: Alignment.topLeft,
+              widthFactor: 0,
+              child: Transform.scale(
+                scale: 0.95,
+                child: Checkbox(
+                  value: task.isCompleted,
+                  activeColor: todo.theme?.color,
+                  onChanged: (_) => {},
+                ),
+              ),
+            ),
+            minLeadingWidth: 48,
+            horizontalTitleGap: 0,
             title: Text(
               task.name,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: task.isCompleted ? theme.colorScheme.error : null,
+              style: theme.textTheme.bodyLarge?.copyWith(
+                color: task.isCompleted ? todo.theme?.color : null,
                 fontWeight: FontWeight.w500,
                 decoration: textDecoration,
               ),
             ),
+            subtitle: task.timestamp != null
+                ? Text(
+                    task.timestamp?.EEEMMMd ?? '',
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      height: 2,
+                      color: theme.textTheme.bodySmall?.color,
+                    ),
+                  )
+                : null,
           );
   }
 }

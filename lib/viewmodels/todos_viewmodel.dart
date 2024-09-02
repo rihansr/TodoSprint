@@ -1,35 +1,20 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../models/todo_model.dart';
+import 'home_viewmodel.dart';
 
 class TodosViewModel extends ChangeNotifier {
-  List<Todo> todos = [];
+  late PageController pageController;
+  late List<Todo> todos;
+  late Todo todo;
+  
+  ValueNotifier<int> index;
 
-  TodosViewModel() : todos = [];
-
-  Future<void> addTodo() async {
-    final documentReference = FirebaseFirestore.instance
-        .collection('todos')
-        .doc('mF8aUoNUanD5daHjE5KP')
-        .collection('todo');
-
-    final docId = documentReference.id;
-    debugPrint('Document ID: $docId');
-
-    return;
-  }
-
-  Future<void> fetchTodos() async {
-    await FirebaseFirestore.instance
-        .collection('todos')
-        .doc('mF8aUoNUanD5daHjE5KP')
-        .collection('todo')
-        .get()
-        .then(
-          (snapshot) => this
-            ..todos =
-                snapshot.docs.map((doc) => Todo.fromMap(doc.data())).toList()
-            ..notifyListeners(),
-        );
-  }
+  TodosViewModel(
+    BuildContext context, {
+    required this.todo,
+    required int index,
+  })  : pageController = PageController(initialPage: index),
+        todos = Provider.of<HomeViewModel>(context, listen: false).todos,
+        index = ValueNotifier<int>(index);
 }

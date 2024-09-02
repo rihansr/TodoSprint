@@ -2,12 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Task {
   final String name;
-  final DateTime timestamp;
+  final DateTime? timestamp;
   final bool isCompleted;
 
   const Task({
     required this.name,
-    required this.timestamp,
+    this.timestamp,
     this.isCompleted = false,
   });
 
@@ -28,7 +28,7 @@ class Task {
       name: map['name'],
       timestamp: map['timestamp'] != null
           ? (map['timestamp'] as Timestamp).toDate()
-          : DateTime.now(),
+          : null,
       isCompleted: map['isCompleted'] ?? false,
     );
   }
@@ -36,13 +36,13 @@ class Task {
   Map<String, dynamic> toMap() {
     return {
       'name': name,
-      'timestamp': Timestamp.fromDate(timestamp),
+      'timestamp': timestamp == null ? null : Timestamp.fromDate(timestamp!),
       'isCompleted': isCompleted,
     };
   }
 
   @override
   String toString() {
-    return 'Task{name: $name, timestamp: $timestamp, isCompleted: $isCompleted}';
+    return 'Task(name: $name, timestamp: $timestamp, isCompleted: $isCompleted)';
   }
 }

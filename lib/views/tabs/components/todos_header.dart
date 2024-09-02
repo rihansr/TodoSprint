@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import '../../../shared/strings.dart';
 
-class TitleBar extends StatelessWidget {
-  const TitleBar({
+class TodosHeader extends StatelessWidget {
+  const TodosHeader({
     super.key,
   });
 
@@ -15,11 +16,11 @@ class TitleBar extends StatelessWidget {
         const Spacer(),
         Text.rich(
           TextSpan(
-            text: 'Tasks',
+            text: string.tasks,
             children: [
               const TextSpan(text: ' '),
               TextSpan(
-                text: 'Lists',
+                text: string.lists,
                 style: TextStyle(
                   fontWeight: FontWeight.w300,
                   color: theme.textTheme.labelSmall?.color,
@@ -36,4 +37,3 @@ class TitleBar extends StatelessWidget {
     );
   }
 }
-

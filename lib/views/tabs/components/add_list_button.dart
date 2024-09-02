@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import '../../../shared/strings.dart';
 
 class AddListButton extends StatelessWidget {
   final Function() onTap;
@@ -15,6 +16,7 @@ class AddListButton extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         FloatingActionButton.small(
+          heroTag: null,
           onPressed: onTap,
           backgroundColor: theme.scaffoldBackgroundColor,
           shape: RoundedRectangleBorder(
@@ -25,7 +27,7 @@ class AddListButton extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         Text(
-          'Add List',
+          string.addList,
           style: theme.textTheme.labelSmall,
         )
       ],

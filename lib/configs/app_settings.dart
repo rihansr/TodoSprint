@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+
 import '../models/settings_model.dart';
 import '../shared/local_storage.dart';
-
 final AppSettings appSettings = AppSettings.value;
 
 class AppSettings {
@@ -18,22 +18,14 @@ class AppSettings {
   }
 
   // Theme
-  set theme(dynamic mode) {
-    if (mode == null) return;
-    _settings = settings.value.copyWith(
-      themeMode: mode is ThemeMode ? mode : ThemeMode.values.byName('$mode'),
-    );
-  }
+  set theme(ThemeMode mode) =>
+      _settings = settings.value.copyWith(themeMode: mode);
 
-  bool get isDarkTheme => settings.value.themeMode == ThemeMode.dark;
-
-  get switchTheme => theme = isDarkTheme ? ThemeMode.light : ThemeMode.dark;
+  ThemeMode get theme => settings.value.themeMode;
 
   // Locale
-  set language(dynamic locale) {
-    if (locale == null) return;
-    _settings = settings.value.copyWith(
-      locale: locale is Locale ? locale : Locale('$locale', ''),
-    );
-  }
+  set language(Locale locale) =>
+      _settings = settings.value.copyWith(locale: locale);
+
+  Locale get language => settings.value.locale;
 }

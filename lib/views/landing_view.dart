@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
+import '../shared/strings.dart';
 import '../viewmodels/dashboard_viewmodel.dart';
 import '../widgets/base_widget.dart';
-import 'others/settings_view.dart';
-import 'todos/todos_view.dart';
+import 'tabs/settings_tab_view.dart';
+import 'tabs/home_tab_view.dart';
 
 class LandingView extends StatelessWidget {
   const LandingView({super.key});
@@ -22,8 +23,8 @@ class LandingView extends StatelessWidget {
         body: IndexedStack(
           index: controller.selectedTab,
           children: const [
-            TodosView(),
-            SettingsView(),
+            HomeTabView(),
+            SettingsTabView(),
           ],
         ),
         bottomNavigationBar: SizedBox(
@@ -32,16 +33,16 @@ class LandingView extends StatelessWidget {
             backgroundColor: Colors.transparent,
             currentIndex: controller.selectedTab,
             onTap: (i) => controller.selectedTab = i,
-            items: const <BottomNavigationBarItem>[
+            items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
-                icon: Icon(Iconsax.task_square),
-                activeIcon: Icon(Iconsax.task_square5),
-                label: 'Todos',
+                icon: const Icon(Iconsax.task_square),
+                activeIcon: const Icon(Iconsax.task_square5),
+                label: string.todos,
               ),
               BottomNavigationBarItem(
-                icon: Icon(Iconsax.setting_44),
-                activeIcon: Icon(Iconsax.setting_45),
-                label: 'Settings',
+                icon: const Icon(Iconsax.setting_44),
+                activeIcon: const Icon(Iconsax.setting_45),
+                label: string.settings,
               ),
             ],
           ),

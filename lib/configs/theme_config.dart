@@ -36,9 +36,6 @@ ThemeData theming(ThemeMode mode) {
     primaryColor: colorPalette.primary,
     dividerColor: colorPalette.divider,
     brightness: mode == ThemeMode.light ? Brightness.light : Brightness.dark,
-    focusColor: Colors.transparent,
-    highlightColor: Colors.transparent,
-    splashColor: Colors.transparent,
     shadowColor: colorPalette.shadow,
     scaffoldBackgroundColor: colorPalette.scaffold,
     cardColor: colorPalette.card,
@@ -67,10 +64,7 @@ ThemeData theming(ThemeMode mode) {
     ),
     checkboxTheme: const CheckboxThemeData().copyWith(
       visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
-      side: BorderSide(
-        color: colorPalette.outline,
-        width: 1,
-      ),
+      side: BorderSide(color: colorPalette.outline),
       fillColor: WidgetStateProperty.resolveWith<Color>(
         (states) {
           if (states.contains(WidgetState.selected)) {
@@ -80,11 +74,8 @@ ThemeData theming(ThemeMode mode) {
         },
       ),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(6),
+        borderRadius: BorderRadius.circular(5),
       ),
-    ),
-    listTileTheme: const ListTileThemeData().copyWith(
-      visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
     ),
     cardTheme: const CardTheme().copyWith(
       clipBehavior: Clip.antiAlias,
@@ -101,6 +92,9 @@ ThemeData theming(ThemeMode mode) {
       color: colorPalette.divider,
       space: 0,
       thickness: 1,
+    ),
+    progressIndicatorTheme: const ProgressIndicatorThemeData().copyWith(
+      circularTrackColor: colorPalette.disable,
     ),
     snackBarTheme: const SnackBarThemeData().copyWith(
       backgroundColor: colorPalette.surface,
@@ -146,6 +140,7 @@ ThemeData theming(ThemeMode mode) {
       ),
       titleLarge: TextStyle(
         fontSize: 18,
+        height: 1,
         color: colorPalette.headline,
         fontWeight: FontWeight.w400,
       ),

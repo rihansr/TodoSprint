@@ -69,7 +69,7 @@ class ColorPalette {
         icon: const Color(0xFF342E5E),
         headline: const Color(0xFF07003B),
         paragraph: const Color(0xFF342E5E),
-        subtitle: const Color(0xFF797595),
+        subtitle: const Color(0xFFB1AFBE),
         hint: const Color(0xFF797595),
         outline: const Color(0xFFC1BFCE),
         divider: const Color(0xFFEBEBEF),

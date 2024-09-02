@@ -75,3 +75,9 @@ class Todo {
   @override
   int get hashCode => id.hashCode;
 }
+
+extension TodoExtension on Todo {
+  int get completionCount => tasks.where((task) => task.isCompleted).length;
+  double get progress => tasks.isEmpty ? 0 : completionCount / count;
+  int get count => tasks.length;
+}

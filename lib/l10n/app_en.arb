@@ -1,13 +1,28 @@
 {
-    "@@locale": "en",
-    "@_TITLES": "<-----------------TITLES----------------->",
-    "appTitle": "TodoSprint",
-    "@_SUBTITLES": "<-----------------SUBTITLES----------------->",
-    "@_LABELS": "<-----------------LABELS----------------->",
-    "okay": "Okay",
-    "retry": "Retry",
-    "@_HINTS": "<-----------------HINTS----------------->",
-    "@_MESSAGES": "<-----------------MESSAGES----------------->",
-    "someErrorOccured": "Some Error Occured!"
-  }
-  
+  "@@locale": "en",
+  "@_TITLES": "<-----------------TITLES----------------->",
+  "appTitle": "TodoSprint",
+  "@_SUBTITLES": "<-----------------SUBTITLES----------------->",
+  "@_LABELS": "<-----------------LABELS----------------->",
+  "todos": "Todos",
+  "settings": "Settings",
+  "addList": "Add List",
+  "tasks": "Tasks",
+  "lists": "Lists",
+  "okay": "Okay",
+  "retry": "Retry",
+  "tasksCount": "{count} of {total} tasks",
+  "@tasksCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "@_HINTS": "<-----------------HINTS----------------->",
+  "@_MESSAGES": "<-----------------MESSAGES----------------->",
+  "someErrorOccured": "Some Error Occured!"
+}

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:todo_sprint/configs/app_settings.dart';
 
 final extension = Utils.value;
 
@@ -20,4 +22,8 @@ extension HexColorExtension on String {
 
 extension ColorExtension on Color {
   String get hex => value.toRadixString(16).substring(2).toUpperCase();
+}
+
+extension DateTimeExtension on DateTime {
+  String get EEEMMMd => DateFormat('EEE, MMM d', appSettings.language.languageCode).format(this);
 }

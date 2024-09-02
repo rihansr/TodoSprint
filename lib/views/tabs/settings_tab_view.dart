@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class SettingsView extends StatelessWidget {
-  const SettingsView({super.key});
+class SettingsTabView extends StatelessWidget {
+  const SettingsTabView({super.key});
 
   @override
   Widget build(BuildContext context) {
