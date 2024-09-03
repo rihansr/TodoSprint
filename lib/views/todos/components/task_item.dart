@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:todo_sprint/shared/utils.dart';
 import '../../../models/task_model.dart';
 import '../../../models/todo_model.dart';
+import '../../../shared/utils.dart';
 
 class TaskItem extends StatelessWidget {
   final Todo todo;
@@ -36,12 +36,12 @@ class TaskItem extends StatelessWidget {
             dense: true,
             minLeadingWidth: 0,
             leading: Transform.scale(
-              scale: 0.75,
+              scale: 0.7,
               child: Checkbox(
                 value: task.isCompleted,
                 onChanged: (_) => {},
                 activeColor: Colors.white,
-                checkColor: theme.textTheme.labelSmall?.color,
+                checkColor: todo.theme.color,
                 side: const BorderSide(color: Colors.white),
               ),
             ),
@@ -61,17 +61,20 @@ class TaskItem extends StatelessWidget {
           )
         : ListTile(
             contentPadding: const EdgeInsets.fromLTRB(32, 0, 16, 0),
+            splashColor: todo.theme.color?.withOpacity(0.2),
             onTap: () => onSelected?.call(
               task.copyWith(isCompleted: !task.isCompleted),
             ),
             leading: Align(
-              alignment: Alignment.topLeft,
+              alignment: task.timestamp != null
+                  ? Alignment.topLeft
+                  : Alignment.centerLeft,
               widthFactor: 0,
               child: Transform.scale(
                 scale: 0.95,
                 child: Checkbox(
                   value: task.isCompleted,
-                  activeColor: todo.theme?.color,
+                  activeColor: todo.theme.color,
                   onChanged: (_) => {},
                 ),
               ),
@@ -81,7 +84,7 @@ class TaskItem extends StatelessWidget {
             title: Text(
               task.name,
               style: theme.textTheme.bodyLarge?.copyWith(
-                color: task.isCompleted ? todo.theme?.color : null,
+                color: task.isCompleted ? todo.theme.color : null,
                 fontWeight: FontWeight.w500,
                 decoration: textDecoration,
               ),

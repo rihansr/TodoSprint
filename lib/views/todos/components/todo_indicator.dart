@@ -4,51 +4,47 @@ import '../../../models/todo_model.dart';
 class TodoIndicator extends StatelessWidget {
   final List<Todo> todos;
   final int currentIndex;
+  final Function(int)? onSelected;
 
   const TodoIndicator({
     super.key,
     required this.todos,
     required this.currentIndex,
+    this.onSelected,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      padding: const EdgeInsets.fromLTRB(40, 12, 16, 12),
-      separatorBuilder: (context, index) => const SizedBox(width: 12),
-      scrollDirection: Axis.horizontal,
-      itemCount: todos.length,
-      itemBuilder: (context, i) {
-        final todo = todos[i];
-        return AnimatedCrossFade(
-          duration: const Duration(milliseconds: 300),
-          crossFadeState: i == currentIndex
-              ? CrossFadeState.showFirst
-              : CrossFadeState.showSecond,
-          firstChild: SizedBox(
-            key: const ValueKey(0),
-            height: 25,
+    return SizedBox(
+      height: 24,
+      child: ListView.builder(
+        padding: const EdgeInsets.fromLTRB(40, 0, 16, 0),
+        scrollDirection: Axis.horizontal,
+        itemCount: todos.length,
+        itemExtent: 16,
+        itemBuilder: (context, i) {
+          final todo = todos[i];
+          return InkWell(
+            onTap: () => onSelected?.call(i),
+            splashColor: Colors.transparent,
             child: Hero(
               tag: "${todo.id}_$currentIndex",
-              child: DecoratedBox(
-                decoration: BoxDecoration(color: todo.theme?.color),
-                child: const SizedBox(height: 25, width: 5),
+              child: AnimatedPadding(
+                duration: const Duration(milliseconds: 200),
+                padding:
+                    EdgeInsets.fromLTRB(5.5, i == currentIndex ? 0 : 8, 5.5, 0),
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: todo.theme.color,
+                    borderRadius: BorderRadius.circular(1),
+                  ),
+                  child: const SizedBox.shrink(),
+                ),
               ),
             ),
-          ),
-          secondChild: SizedBox(
-            key: const ValueKey(1),
-            height: 25,
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: DecoratedBox(
-                decoration: BoxDecoration(color: todo.theme?.color),
-                child: const SizedBox(height: 15, width: 5),
-              ),
-            ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

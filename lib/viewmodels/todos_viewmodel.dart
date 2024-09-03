@@ -1,20 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../models/task_model.dart';
 import '../models/todo_model.dart';
 import 'home_viewmodel.dart';
 
 class TodosViewModel extends ChangeNotifier {
+  final BuildContext context;
+  final HomeViewModel homeProvider;
+  void Function(Task task)? addTaskListener;
   late PageController pageController;
-  late List<Todo> todos;
+  List<Todo> todos = const [];
   late Todo todo;
-  
+
   ValueNotifier<int> index;
 
   TodosViewModel(
-    BuildContext context, {
+    this.context, {
     required this.todo,
     required int index,
   })  : pageController = PageController(initialPage: index),
-        todos = Provider.of<HomeViewModel>(context, listen: false).todos,
-        index = ValueNotifier<int>(index);
+        homeProvider = Provider.of<HomeViewModel>(context, listen: false),
+        index = ValueNotifier<int>(index) {
+    todos = homeProvider.todos;
+  }
+
+  set page(int i) => pageController.jumpToPage(i);
+
+  refreshTodo(Todo todo) => homeProvider.resetTodo(todo);
 }

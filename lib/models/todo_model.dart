@@ -4,7 +4,7 @@ import 'theme_model.dart';
 
 class Todo {
   final String id;
-  final TodoTheme? theme;
+  final TodoTheme theme;
   final String title;
   final String? description;
   final List<Task> tasks;
@@ -12,14 +12,15 @@ class Todo {
 
   const Todo({
     required this.id,
-    this.theme,
+    this.theme = TodoTheme.defaultTheme,
     required this.title,
     this.description,
-    this.tasks = const [],
+    this.tasks = const <Task>[],
     required this.timestamp,
   });
 
   Todo copyWith({
+    String? id,
     String? title,
     TodoTheme? theme,
     String? description,
@@ -27,7 +28,7 @@ class Todo {
     DateTime? timestamp,
   }) {
     return Todo(
-      id: id,
+      id: id ?? this.id,
       theme: theme ?? this.theme,
       title: title ?? this.title,
       description: description ?? this.description,
@@ -39,12 +40,14 @@ class Todo {
   factory Todo.fromMap(Map<String, dynamic> map) {
     return Todo(
       id: map['id'],
-      theme: map['theme'] != null ? TodoTheme.fromMap(map['theme']) : null,
+      theme: map['theme'] != null
+          ? TodoTheme.fromMap(map['theme'])
+          : TodoTheme.defaultTheme,
       title: map['title'],
       description: map['description'],
       tasks: map['tasks'] != null
           ? List<Task>.from(map['tasks'].map((x) => Task.fromMap(x)))
-          : [],
+          : const <Task>[],
       timestamp: map['timestamp'] != null
           ? (map['timestamp'] as Timestamp).toDate()
           : DateTime.now(),
@@ -54,7 +57,7 @@ class Todo {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'theme': theme?.toMap(),
+      'theme': theme.toMap(),
       'title': title,
       'description': description,
       'tasks': tasks.map((x) => x.toMap()).toList(),

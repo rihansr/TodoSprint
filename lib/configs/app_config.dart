@@ -32,14 +32,12 @@ class AppConfig {
   static const config = {
     "debug": {
       "base": {
-        "app_id": "com.example.glucose_tracker_app",
-        "app_store_id": "6475195875"
+        "app_id": "com.rsr.todosprint",
       }
     },
     "production": {
       "base": {
-        "app_id": "com.example.glucose_tracker_app",
-        "app_store_id": "6475195875"
+        "app_id": "com.rsr.todosprint",
       }
     }
   };

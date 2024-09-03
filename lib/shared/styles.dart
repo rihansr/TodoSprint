@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import '../services/navigation_service.dart';
 import 'colors.dart';
@@ -9,6 +11,8 @@ final style = Style.value;
 class Style {
   static Style get value => Style._();
   Style._();
+
+  final defaultBlur = ImageFilter.blur(sigmaX: 4, sigmaY: 4);
 
   SnackBar snackbar(
     String message, {
@@ -52,7 +56,7 @@ extension _MessageTypeExtensions on AlertType {
   }
 
   Color? get backgroundColor => (() {
-    final theme = Theme.of(navigator.context);
+        final theme = Theme.of(navigator.context);
         switch (this) {
           case AlertType.error:
             return theme.colorScheme.error;

@@ -2,6 +2,10 @@
   "@@locale": "en",
   "@_TITLES": "<-----------------TITLES----------------->",
   "appTitle": "TodoSprint",
+  "newTodo": "New To-Do",
+  "editTodo": "Edit To-Do",
+  "newTask": "New Task",
+  "editTask": "Edit Task",
   "@_SUBTITLES": "<-----------------SUBTITLES----------------->",
   "@_LABELS": "<-----------------LABELS----------------->",
   "todos": "Todos",
@@ -9,6 +13,8 @@
   "addList": "Add List",
   "tasks": "Tasks",
   "lists": "Lists",
+  "save": "Save",
+  "cancel": "Cancel",
   "okay": "Okay",
   "retry": "Retry",
   "tasksCount": "{count} of {total} tasks",
@@ -23,6 +29,11 @@
     }
   },
   "@_HINTS": "<-----------------HINTS----------------->",
+  "nameHint": "Name",
+  "titleHint": "Title",
+  "descriptionHint": "Description",
   "@_MESSAGES": "<-----------------MESSAGES----------------->",
+  "addTitleMessage": "Add a title for the list",
+  "addNameMessage": "Add a name for the task",
   "someErrorOccured": "Some Error Occured!"
 }

@@ -6,12 +6,14 @@ class TodoItem extends StatelessWidget {
   final Todo todo;
   final int index;
   final Function(Todo item) onSelected;
+  final Function(Todo item)? onAction;
 
   const TodoItem({
     super.key,
     required this.todo,
     required this.index,
     required this.onSelected,
+    this.onAction,
   });
 
   @override
@@ -20,16 +22,17 @@ class TodoItem extends StatelessWidget {
     return Hero(
       tag: "${todo.id}_$index",
       child: Card(
-        color: todo.theme?.color,
-        shadowColor: todo.theme?.color,
+        color: todo.theme.color,
+        shadowColor: todo.theme.color,
         child: InkWell(
           onTap: () => onSelected.call(todo),
+          onLongPress: () => onAction?.call(todo),
           borderRadius: BorderRadius.circular(5),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
-                flex: 1,
+                flex: 2,
                 child: Container(
                   padding: const EdgeInsets.fromLTRB(16, 0, 8, 0),
                   alignment: Alignment.bottomLeft,
@@ -45,9 +48,9 @@ class TodoItem extends StatelessWidget {
                   ),
                 ),
               ),
-              const Divider(indent: 16, height: 28),
+              const Expanded(flex: 1, child: Divider(indent: 16)),
               Expanded(
-                flex: 3,
+                flex: 6,
                 child: ListView.builder(
                   physics: const BouncingScrollPhysics(),
                   itemCount: todo.tasks.length,

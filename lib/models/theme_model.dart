@@ -1,4 +1,4 @@
-import 'dart:ui';
+import 'package:flutter/material.dart';
 import '../shared/utils.dart';
 
 class TodoTheme {
@@ -15,6 +15,8 @@ class TodoTheme {
       color: color ?? this.color,
     );
   }
+
+  static const TodoTheme defaultTheme = TodoTheme(color: Colors.amber);
 
   factory TodoTheme.fromMap(Map<String, dynamic> map) {
     return TodoTheme(

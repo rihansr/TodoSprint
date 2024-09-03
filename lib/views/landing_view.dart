@@ -13,7 +13,7 @@ class LandingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseWidget<DashboardViewModel>(
-      model: Provider.of(context),
+      model: DashboardViewModel(),
       builder: (context, controller, _) => Scaffold(
         appBar: AppBar(
           leading: const Icon(

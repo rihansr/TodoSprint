@@ -2,22 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 import '../../../models/todo_model.dart';
+import '../../../shared/functions.dart';
 import '../../../shared/strings.dart';
 import '../../../viewmodels/todo_viewmodel.dart';
-import 'task_item.dart';
+import '../components/task_item.dart';
 
 class TodoPage extends StatelessWidget {
   final Todo todo;
+  final Function(Todo todo) onUpdate;
+  final TaskListener listener;
+
   const TodoPage({
     super.key,
     required this.todo,
+    required this.onUpdate,
+    required this.listener,
   });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return ChangeNotifierProvider<TodoViewModel>.value(
-      value: TodoViewModel(todo),
+      value: TodoViewModel(
+        todo: todo,
+        onUpdate: onUpdate,
+        listener: listener,
+      ),
       child: Consumer<TodoViewModel>(
           builder: (context, controller, _) => Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -34,7 +44,7 @@ class TodoPage extends StatelessWidget {
                         child: CircularProgressIndicator(
                           value: todo.progress,
                           strokeWidth: 2,
-                          color: todo.theme?.color,
+                          color: todo.theme.color,
                           strokeCap: StrokeCap.round,
                         ),
                       ),
@@ -57,9 +67,9 @@ class TodoPage extends StatelessWidget {
                         return Dismissible(
                           key: ValueKey(i),
                           direction: DismissDirection.endToStart,
-                          onDismissed: (_) => controller.removeTask(i),
+                          onDismissed: (_) => controller.removeTask(task, i),
                           background: Container(
-                            color: Colors.red,
+                            color: todo.theme.color,
                             alignment: Alignment.centerRight,
                             padding: const EdgeInsets.symmetric(horizontal: 16),
                             child:

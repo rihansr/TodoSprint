@@ -88,6 +88,22 @@ ThemeData theming(ThemeMode mode) {
         borderRadius: BorderRadius.circular(6),
       ),
     ),
+    textButtonTheme: TextButtonThemeData(
+      style: const ButtonStyle().copyWith(
+        overlayColor: const WidgetStatePropertyAll<Color>(
+          Colors.transparent,
+        ),
+        textStyle: WidgetStatePropertyAll(
+          TextStyle(
+            fontSize: 15,
+            height: 1,
+            color: colorPalette.primary,
+            fontWeight: FontWeight.w600,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+      ),
+    ),
     dividerTheme: const DividerThemeData().copyWith(
       color: colorPalette.divider,
       space: 0,
