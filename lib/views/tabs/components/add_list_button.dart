@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../../shared/strings.dart';
+import '../../../widgets/clipper_widget.dart';
 
 class AddListButton extends StatelessWidget {
   final Function() onTap;
@@ -15,17 +16,28 @@ class AddListButton extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        FloatingActionButton.small(
-          heroTag: null,
-          onPressed: onTap,
-          backgroundColor: theme.scaffoldBackgroundColor,
-          shape: RoundedRectangleBorder(
-            side: BorderSide(color: theme.colorScheme.outline),
-            borderRadius: BorderRadius.circular(4),
+        Clipper(
+          size: 56,
+          color: theme.colorScheme.surface,
+          radius: 12,
+          shadows: [
+            BoxShadow(
+              color: theme.colorScheme.shadow,
+              offset: const Offset(10, 10),
+              blurRadius: 20,
+            ),
+            BoxShadow(
+              color: theme.highlightColor,
+              offset: const Offset(-10, -10),
+              blurRadius: 20,
+            ),
+          ],
+          child: IconButton(
+            icon: const Icon(Iconsax.add),
+            onPressed: onTap,
           ),
-          child: const Icon(Iconsax.add),
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 16),
         Text(
           string.addList,
           style: theme.textTheme.labelSmall,

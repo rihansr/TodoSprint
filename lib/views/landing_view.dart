@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:provider/provider.dart';
 import '../shared/strings.dart';
 import '../viewmodels/dashboard_viewmodel.dart';
 import '../widgets/base_widget.dart';

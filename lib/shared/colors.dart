@@ -6,14 +6,11 @@ class ColorPalette {
   Color onPrimary;
   Color secondary;
   Color onSecondary;
-  Color tertiary;
-  Color onTertiary;
+  Color highlight;
   Color surface;
   Color onSurface;
   Color scaffold;
   Color card;
-  Color active;
-  Color inactive;
   Color shadow;
   Color icon;
   Color headline;
@@ -31,14 +28,11 @@ class ColorPalette {
     required this.onPrimary,
     required this.secondary,
     required this.onSecondary,
-    required this.tertiary,
-    required this.onTertiary,
+    required this.highlight,
     required this.surface,
     required this.onSurface,
     required this.scaffold,
     required this.card,
-    required this.active,
-    required this.inactive,
     required this.shadow,
     required this.icon,
     required this.headline,
@@ -55,52 +49,46 @@ class ColorPalette {
   factory ColorPalette.light() => ColorPalette(
         primary: const Color(0xFF4E53EE),
         onPrimary: const Color(0xFFFFFFFF),
-        secondary: const Color(0xFFD4C4FC),
-        onSecondary: const Color(0xFF000000),
-        tertiary: const Color(0xFFF8ED91),
-        onTertiary: const Color(0xFF000000),
-        surface: const Color(0xFFFFFFFF),
-        onSurface: const Color(0xFF000000),
-        scaffold: const Color(0xFFFFFFFF),
+        secondary: const Color(0xFFE91E63),
+        onSecondary: const Color(0xFFFFFFFF),
+        surface: const Color(0xFFF7F7F7),
+        onSurface: const Color(0xFF303030),
+        highlight: const Color(0xFFFFFFFF),
+        scaffold: const Color(0xFFF2F4F5),
         card: const Color(0xFFFFFFFF),
-        active: const Color(0xFF12B76A),
-        inactive: const Color(0xFFF79009),
-        shadow: const Color(0x1A101828),
+        shadow: const Color(0x1A000000),
         icon: const Color(0xFF342E5E),
-        headline: const Color(0xFF07003B),
-        paragraph: const Color(0xFF342E5E),
-        subtitle: const Color(0xFFB1AFBE),
-        hint: const Color(0xFF797595),
-        outline: const Color(0xFFC1BFCE),
+        headline: const Color(0xFF212121),
+        paragraph: const Color(0xFF424242),
+        subtitle: const Color(0xFF757575),
+        hint: const Color(0xFFB0BEC5),
+        outline: const Color(0xFFB0BEC5),
         divider: const Color(0xFFEBEBEF),
-        disable: const Color(0xFFEBEBEF),
-        error: const Color(0xFFDC3545),
+        disable: const Color(0xFFCFD8DC),
+        error: const Color(0xFFD50000),
         onError: const Color(0xFFFFFFFF),
       );
 
   factory ColorPalette.dark() => ColorPalette(
         primary: const Color(0xFF4E53EE),
         onPrimary: const Color(0xFFFFFFFF),
-        secondary: const Color(0xFFD4C4FC),
+        secondary: const Color(0xFFE91E63),
         onSecondary: const Color(0xFFFFFFFF),
-        tertiary: const Color(0xFFFDF8D9),
-        onTertiary: const Color(0xFFFFFFFF),
-        surface: const Color(0xFF1D1E22),
-        onSurface: const Color(0xFFFFFFFF),
-        scaffold: const Color(0xFF000000),
-        card: const Color(0xFF32363F),
-        active: const Color(0xFF12B76A),
-        inactive: const Color(0xFFF79009),
-        shadow: const Color(0x1AFFFFFF),
-        icon: const Color(0xFFFFFFFF),
-        headline: const Color(0xFFFFFFFF),
-        paragraph: const Color(0xFFFBFBFC),
-        subtitle: const Color(0xFF606673),
-        hint: const Color(0xFF606673),
-        outline: const Color(0xFF797595),
-        divider: const Color(0xFFFFFFFF),
-        disable: const Color(0xFF26272C),
-        error: const Color(0xFFDC3545),
+        surface: const Color(0xFF000000),
+        onSurface: const Color(0xFFB3B3B3),
+        highlight: const Color(0xFF1A1A1A),
+        scaffold: const Color(0xFF0A0A0A),
+        card: const Color(0xFF1A1A1A),
+        shadow: const Color(0x60000000),
+        icon: const Color(0xFFB0BEC5),
+        headline: const Color(0xFFB0BEC5),
+        paragraph: const Color(0xFF9E9E9E),
+        subtitle: const Color(0xFF757575),
+        hint: const Color(0xFF616161),
+        outline: const Color(0xFF424242),
+        divider: const Color(0xFF333333),
+        disable: const Color(0xFF1C1C1C),
+        error: const Color(0xFFCF6679),
         onError: const Color(0xFFFFFFFF),
       );
 }

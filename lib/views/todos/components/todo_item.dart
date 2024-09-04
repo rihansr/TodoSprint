@@ -20,7 +20,7 @@ class TodoItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Hero(
-      tag: "${todo.id}_$index",
+    tag: "${todo.id}_$index",
       child: Card(
         color: todo.theme.color,
         shadowColor: todo.theme.color,
@@ -48,11 +48,13 @@ class TodoItem extends StatelessWidget {
                   ),
                 ),
               ),
-              const Expanded(flex: 1, child: Divider(indent: 16)),
+              const SizedBox(height: 20),
+              const Divider(indent: 16),
               Expanded(
                 flex: 6,
                 child: ListView.builder(
                   physics: const BouncingScrollPhysics(),
+                  padding: const EdgeInsets.fromLTRB(0, 16, 0, 8),
                   itemCount: todo.tasks.length,
                   itemBuilder: (context, i) {
                     final task = todo.tasks[i];

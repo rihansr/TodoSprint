@@ -7,6 +7,8 @@ class InputField extends StatelessWidget {
   final bool autoFocus;
   final String? hints;
   final TextCapitalization textCapitalization;
+  final TextInputType? keyboardType;
+  final bool unfocusOnTapOutside;
   final Function(String)? onFieldSubmitted;
   final String? Function(String?)? validator;
   const InputField({
@@ -16,6 +18,8 @@ class InputField extends StatelessWidget {
     this.maxLines = 1,
     this.autoFocus = false,
     this.hints,
+    this.keyboardType,
+    this.unfocusOnTapOutside = false,
     this.onFieldSubmitted,
     this.textCapitalization = TextCapitalization.none,
     this.validator,
@@ -35,7 +39,8 @@ class InputField extends StatelessWidget {
       autocorrect: true,
       autofocus: autoFocus,
       textCapitalization: textCapitalization,
-      onTapOutside: (_) => FocusScope.of(context).unfocus(),
+      onTapOutside:
+          unfocusOnTapOutside ? (_) => FocusScope.of(context).unfocus() : null,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: InputDecoration(
         fillColor: theme.disabledColor,
@@ -44,6 +49,7 @@ class InputField extends StatelessWidget {
         enabledBorder: border,
         focusedBorder: border,
       ),
+      keyboardType: keyboardType,
       textInputAction: onFieldSubmitted != null ? TextInputAction.done : null,
       onFieldSubmitted: onFieldSubmitted,
       validator: validator,

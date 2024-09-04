@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       child: ValueListenableBuilder(
         valueListenable: appSettings.settings,
         builder: (_, settings, __) => MaterialApp.router(
-          title: 'GlucoBuddy',
+          title: 'TodoSprint',
           debugShowCheckedModeBanner: false,
           scaffoldMessengerKey: navigator.scaffoldMessengerKey,
           //themeMode: settings.themeMode,

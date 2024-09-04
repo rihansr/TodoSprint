@@ -141,6 +141,7 @@ class _AddTodoViewState extends State<_AddTodoView> {
                     hints: string.titleHint,
                     maxLines: 1,
                     autoFocus: _todo?.title == null,
+                    keyboardType: TextInputType.name,
                     textCapitalization: TextCapitalization.words,
                     onFieldSubmitted: (_) => _save(),
                     validator: (value) =>
@@ -152,6 +153,7 @@ class _AddTodoViewState extends State<_AddTodoView> {
                     hints: string.descriptionHint,
                     minLines: 4,
                     maxLines: 14,
+                    keyboardType: TextInputType.multiline,
                     autoFocus: _todo?.description == null,
                     textCapitalization: TextCapitalization.sentences,
                   ),

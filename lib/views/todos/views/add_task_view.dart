@@ -157,6 +157,8 @@ class _AddTaskViewState extends State<_AddTaskView> {
                 controller: _taskController,
                 maxLines: 14,
                 autoFocus: true,
+                unfocusOnTapOutside: true,
+                keyboardType: TextInputType.multiline,
                 textCapitalization: TextCapitalization.sentences,
                 onFieldSubmitted: (_) => _save(),
                 validator: (value) =>

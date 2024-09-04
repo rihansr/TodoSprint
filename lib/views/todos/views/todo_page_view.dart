@@ -57,10 +57,13 @@ class TodoPage extends StatelessWidget {
                       style: const TextStyle(height: 2),
                     ),
                   ),
-                  const Divider(indent: 80, height: 40),
+                  const SizedBox(height: 20),
+                  const Divider(indent: 80),
                   Expanded(
                     child: AnimatedList(
                       key: controller.listKey,
+                      physics: const BouncingScrollPhysics(),
+                      padding: const EdgeInsets.symmetric(vertical: 20),
                       initialItemCount: todo.tasks.length,
                       itemBuilder: (context, i, animation) {
                         final task = todo.tasks[i];
