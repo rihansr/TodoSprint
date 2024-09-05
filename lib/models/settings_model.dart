@@ -6,7 +6,7 @@ class Settings {
   final Locale locale;
 
   const Settings({
-    this.themeMode = ThemeMode.system,
+    this.themeMode = ThemeMode.light,
     this.locale = const Locale('en', ''),
   });
 

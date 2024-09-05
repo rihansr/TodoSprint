@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../shared/strings.dart';
 import '../../viewmodels/home_viewmodel.dart';
 import '../../widgets/base_widget.dart';
 import '../todos/components/todo_item.dart';
 import 'components/add_todo_button.dart';
-import 'components/todos_header.dart';
+import 'components/header.dart';
 import 'views/add_todo_view.dart';
 
 class HomeTabView extends StatelessWidget {
@@ -19,10 +20,14 @@ class HomeTabView extends StatelessWidget {
       builder: (context, controller, _) => Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const TodosHeader(key: Key('todos_header')),
+          Header(
+            key: const Key('todos_header'),
+            label: Strings.of(context).tasks,
+            sublabel: Strings.of(context).lists,
+          ),
           const Spacer(flex: 2, key: Key('header_spacer')),
           AddTodoButton(
-            onTap: () => popupTodoEditor(
+            onTap: () => showTodoEditor(
               context: context,
               listener: (todo) async => controller.addTodo(todo),
             ),

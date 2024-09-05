@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../models/settings_model.dart';
 import '../shared/local_storage.dart';
+
 final AppSettings appSettings = AppSettings.value;
 
 class AppSettings {

@@ -1,0 +1,44 @@
+{
+  "@@locale": "es",
+  "@_TITLES": "<-----------------TITLES----------------->",
+  "appTitle": "TodoSprint",
+  "newTodo": "Nueva Tarea",
+  "editTodo": "Editar Tarea",
+  "newTask": "Nueva Tarea",
+  "editTask": "Editar Tarea",
+  "@_LABELS": "<-----------------LABELS----------------->",
+  "todos": "Tareas",
+  "settings": "Ajustes",
+  "app": "App",
+  "appearance": "Apariencia",
+  "addList": "Añadir Lista",
+  "tasks": "Tareas",
+  "lists": "Listas",
+  "save": "Guardar",
+  "cancel": "Cancelar",
+  "edit": "Editar",
+  "delete": "Eliminar",
+  "okay": "De acuerdo",
+  "retry": "Reintentar",
+  "thememode": "Modo de tema",
+  "language": "Idioma",
+  "tasksCount": "{count} de {total} tareas",
+  "@tasksCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "@_HINTS": "<-----------------HINTS----------------->",
+  "nameHint": "Nombre",
+  "titleHint": "Título",
+  "descriptionHint": "Descripción",
+  "@_MESSAGES": "<-----------------MESSAGES----------------->",
+  "addTitleMessage": "Añadir un título para la lista",
+  "addNameMessage": "Añadir un nombre para la tarea",
+  "someErrorOccured": "¡Ocurrió algún error!"
+}

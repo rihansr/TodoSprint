@@ -71,7 +71,7 @@ class TodoPage extends StatelessWidget {
                   onSelected: (value) {
                     switch (value) {
                       case 'edit':
-                        popupTodoEditor(
+                        showTodoEditor(
                           context: context,
                           todo: controller.todo,
                           listener: (todo) => controller.editTodo(todo),
@@ -130,8 +130,12 @@ class TodoPage extends StatelessWidget {
                     background: Container(
                       color: controller.todo.theme.color,
                       alignment: Alignment.centerRight,
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: const Icon(Iconsax.trash, color: Colors.white),
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      child: const Icon(
+                        Iconsax.trash,
+                        color: Colors.white,
+                        size: 20,
+                      ),
                     ),
                     child: SizeTransition(
                       sizeFactor: animation,
@@ -139,7 +143,7 @@ class TodoPage extends StatelessWidget {
                           todo: controller.todo,
                           task: task,
                           onChecked: (item) => controller.updateTask(item, i),
-                          onSelected: (item) => popupTaskEditor(
+                          onSelected: (item) => showTaskEditor(
                                 context: context,
                                 todo: controller.todo,
                                 task: item,

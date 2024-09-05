@@ -79,7 +79,7 @@ class TodosView extends StatelessWidget {
                         padding: const EdgeInsets.only(right: 16),
                         child: AddTaskButton(
                           color: todo.theme.color,
-                          onPressed: () => popupTaskEditor(
+                          onPressed: () => showTaskEditor(
                             context: context,
                             todo: controller.todo,
                             listener: controller.addTaskListener,

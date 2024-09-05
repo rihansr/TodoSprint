@@ -12,7 +12,7 @@ import '../../../shared/styles.dart';
 import '../../../shared/utils.dart';
 import '../../../widgets/input_widget.dart';
 
-popupTaskEditor({
+showTaskEditor({
   required BuildContext context,
   Todo? todo,
   Task? task,
@@ -103,14 +103,13 @@ class _AddTaskViewState extends State<_AddTaskView> {
         await notificationService.cancelNotification([_task!.id]);
       }
       if (_timestamp != null) {
-        if (_task?.timestamp != null) {
-          await notificationService.schedule(
+        await notificationService.schedule(
             task.id,
             _timestamp!,
             DateTimeComponents.dateAndTime,
+            title: widget.todo?.title ?? 'Reminder',
+            body: task.name,
           );
-        }
-        if (_timestamp != null) {}
       }
       context.pop(task);
     }

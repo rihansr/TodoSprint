@@ -80,7 +80,7 @@ class TaskItem extends StatelessWidget {
                   : Alignment.centerLeft,
               widthFactor: 0,
               child: Transform.scale(
-                scale: 0.95,
+                scale: 0.85,
                 child: Checkbox(
                   value: task.isCompleted,
                   activeColor: todo.theme.color,
@@ -100,11 +100,8 @@ class TaskItem extends StatelessWidget {
             ),
             subtitle: task.timestamp != null
                 ? Text(
-                    task.timestamp?.EEEMMMd ?? '',
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      height: 2,
-                      color: theme.textTheme.bodySmall?.color,
-                    ),
+                    task.timestamp?.time ?? '',
+                    style: theme.textTheme.bodySmall?.copyWith(height: 2.25,),
                   )
                 : null,
           );

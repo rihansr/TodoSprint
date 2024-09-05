@@ -1,0 +1,44 @@
+{
+    "@@locale": "fr",
+    "@_TITLES": "<-----------------TITLES----------------->",
+    "appTitle": "TodoSprint",
+    "newTodo": "Nouvelle tâche",
+    "editTodo": "Modifier la tâche",
+    "newTask": "Nouvelle tâche",
+    "editTask": "Modifier la tâche",
+    "@_LABELS": "<-----------------LABELS----------------->",
+    "todos": "Tâches",
+    "settings": "Paramètres",
+    "app": "App",
+    "appearance": "Apparence",
+    "addList": "Ajouter une liste",
+    "tasks": "Tâches",
+    "lists": "Listes",
+    "save": "Sauvegarder",
+    "cancel": "Annuler",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "okay": "D'accord",
+    "retry": "Réessayer",
+    "thememode": "Mode Thème",
+    "language": "Langue",
+    "tasksCount": "{count} de {total} tâches",
+    "@tasksCount": {
+      "placeholders": {
+        "count": {
+          "type": "int"
+        },
+        "total": {
+          "type": "int"
+        }
+      }
+    },
+    "@_HINTS": "<-----------------HINTS----------------->",
+    "nameHint": "Nom",
+    "titleHint": "Titre",
+    "descriptionHint": "Description",
+    "@_MESSAGES": "<-----------------MESSAGES----------------->",
+    "addTitleMessage": "Ajouter un titre à la liste",
+    "addNameMessage": "Ajouter un nom à la tâche",
+    "someErrorOccured": "Une erreur s'est produite!"
+  }

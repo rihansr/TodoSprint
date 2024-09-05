@@ -15,7 +15,7 @@ class FirestoreService {
 
   call(Future action, Function() callback) async {
     try {
-      action.then((_) => callback.call());
+      await action;
     } catch (error) {
       debug.print(error);
     } finally {

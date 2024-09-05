@@ -24,6 +24,10 @@ extension HexColorExtension on String {
   }
 }
 
+extension StrinExtension on String {
+  String get capitalize => isNotEmpty ? '${this[0].toUpperCase()}${substring(1)}' : '';
+}
+
 extension ColorExtension on Color {
   String get hex => value.toRadixString(16).substring(2).toUpperCase();
 }

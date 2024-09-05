@@ -9,7 +9,7 @@ import '../../../shared/utils.dart';
 import '../../../widgets/color_picker.dart';
 import '../../../widgets/input_widget.dart';
 
-popupTodoEditor({
+showTodoEditor({
   required BuildContext context,
   Todo? todo,
   void Function(Todo todo)? listener,

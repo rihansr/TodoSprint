@@ -49,10 +49,10 @@ class TodoViewModel extends ChangeNotifier {
   editTodo(Todo todo) async {
     this.todo = todo.copyWith(timestamp: DateTime.now());
     await firestoreService.call(
-      firestoreService.todosReference.doc(todo.id).update(todo.toMap()),
+      firestoreService.todosReference.doc(this.todo.id).update(this.todo.toMap()),
       () {
         notifyListeners();
-        onUpdate.call(todo);
+        onUpdate.call(this.todo);
       },
     );
   }

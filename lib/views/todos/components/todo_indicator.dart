@@ -19,7 +19,8 @@ class TodoIndicator extends StatelessWidget {
     return SizedBox(
       height: 24,
       child: ListView.builder(
-        padding: const EdgeInsets.fromLTRB(40, 0, 16, 0),
+        physics: const BouncingScrollPhysics(),
+        padding: const EdgeInsets.symmetric(horizontal: 32),
         scrollDirection: Axis.horizontal,
         itemCount: todos.length,
         itemExtent: 16,

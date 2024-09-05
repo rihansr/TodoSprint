@@ -6,10 +6,11 @@
   "editTodo": "Edit To-Do",
   "newTask": "New Task",
   "editTask": "Edit Task",
-  "@_SUBTITLES": "<-----------------SUBTITLES----------------->",
   "@_LABELS": "<-----------------LABELS----------------->",
   "todos": "Todos",
   "settings": "Settings",
+  "app": "App",
+  "appearance": "Appearance",
   "addList": "Add List",
   "tasks": "Tasks",
   "lists": "Lists",
@@ -19,6 +20,8 @@
   "delete": "Delete",
   "okay": "Okay",
   "retry": "Retry",
+  "thememode": "Theme Mode",
+  "language": "Language",
   "tasksCount": "{count} of {total} tasks",
   "@tasksCount": {
     "placeholders": {
