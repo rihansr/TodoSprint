@@ -1,1 +1,1 @@
-const String kFontFamily = "Inter";
+const String kFontFamily = "Lato";

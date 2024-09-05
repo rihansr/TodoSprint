@@ -3,17 +3,27 @@ import 'package:firebase_core/firebase_core.dart'
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
 
+import '../services/analytics_service.dart';
+import '../services/auth_service.dart';
+
 final firebaseConfig = FirebaseConfig.value;
 
 class FirebaseConfig {
   static FirebaseConfig get value => FirebaseConfig._();
   FirebaseConfig._();
 
-  Future<void> init() async => Firebase.apps.isEmpty
-      ? await Firebase.initializeApp(
-          options: DefaultFirebaseOptions.currentPlatform,
-        )
-      : Firebase.app();
+  Future<void> init() async {
+    Firebase.apps.isEmpty
+        ? await Firebase.initializeApp(
+            options: DefaultFirebaseOptions.currentPlatform,
+          )
+        : Firebase.app();
+
+    Future.wait([
+      analyticsService.init(),
+      authService.init(),
+    ]);
+  }
 }
 
 class DefaultFirebaseOptions {

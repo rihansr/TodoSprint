@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/task_model.dart';
 import '../models/todo_model.dart';
+import '../services/analytics_service.dart';
 import '../services/firestore_service.dart';
 import '../services/notification_service.dart';
 import '../shared/functions.dart';
@@ -28,12 +29,14 @@ class TodoViewModel extends ChangeNotifier {
     tasks.add(task);
     await editTodo(todo.copyWith(tasks: tasks));
     listKey.currentState?.insertItem(tasks.length - 1);
+    analyticsService.logAddTask(todo, task);
   }
 
   Future<void> updateTask(Task task, int at) async {
     final tasks = todo.tasks;
     tasks[at] = task;
     await editTodo(todo.copyWith(tasks: tasks));
+    if (task.isCompleted) analyticsService.logCompleteTask(todo, task);
   }
 
   Future<void> removeTask(Task task, int at) async {
@@ -44,23 +47,31 @@ class TodoViewModel extends ChangeNotifier {
     if (task.timestamp != null) {
       await notificationService.cancelNotification([task.id]);
     }
+    analyticsService.logDeleteTask(todo, task);
   }
 
-  editTodo(Todo todo) async {
-    this.todo = todo.copyWith(timestamp: DateTime.now());
-    await firestoreService.call(
-      firestoreService.todosReference.doc(this.todo.id).update(this.todo.toMap()),
-      () {
+  editTodo(Todo item) async {
+    todo = item.copyWith(timestamp: DateTime.now());
+    firestoreService.todosCollection.update(
+      id: todo.id,
+      data: todo.toMap(),
+      callback: () {
         notifyListeners();
-        onUpdate.call(this.todo);
+        onUpdate.call(todo);
+        if (todo.progress == 1) {
+          analyticsService.logCompleteTodo(todo);
+        }
       },
     );
   }
 
   Future<void> deleteTodo() async {
-    await firestoreService.call(
-      firestoreService.todosReference.doc(todo.id).delete(),
-      () => onRemove.call(todo),
+    firestoreService.todosCollection.delete(
+      id: todo.id,
+      callback: () {
+        onRemove.call(todo);
+        analyticsService.logDeleteTodo(todo);
+      },
     );
     await notificationService.cancelNotification(
       todo.tasks

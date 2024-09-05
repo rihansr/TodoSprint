@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
       child: ValueListenableBuilder(
         valueListenable: appSettings.settings,
         builder: (_, settings, __) => MaterialApp.router(
+          
           title: 'TodoSprint',
           debugShowCheckedModeBanner: false,
           scaffoldMessengerKey: navigator.scaffoldMessengerKey,

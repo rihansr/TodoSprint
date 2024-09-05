@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import '../models/todo_model.dart';
 import '../routing/routes.dart';
+import '../services/analytics_service.dart';
 import '../services/firestore_service.dart';
 import '../services/navigation_service.dart';
 
@@ -15,10 +16,16 @@ class HomeViewModel extends ChangeNotifier {
         todos = [];
 
   Future<void> fetchTodos() async {
-    await firestoreService.todosReference.get().then(
+    await firestoreService.todosCollection
+        .orderBy('timestamp', descending: true)
+        .get()
+        .then(
           (snapshot) => this
-            ..todos =
-                snapshot.docs.map((doc) => Todo.fromMap(doc.data())).toList()
+            ..todos = snapshot.docs
+                .map(
+                  (doc) => Todo.fromMap(doc.data()),
+                )
+                .toList()
             ..notifyListeners(),
         );
   }
@@ -26,14 +33,18 @@ class HomeViewModel extends ChangeNotifier {
   get notify => notifyListeners();
 
   Future<void> addTodo(Todo todo) async {
-    final reference = firestoreService.todosReference;
+    final reference = firestoreService.todosCollection;
     todo = todo.copyWith(id: reference.doc().id);
-    await firestoreService.call(
-      reference.doc(todo.id).set(todo.toMap()),
-      () => this
-        ..todos.insert(0, todo)
-        ..notifyListeners()
-        ..scrollToStart,
+    await firestoreService.todosCollection.set(
+      id: todo.id,
+      data: todo.toMap(),
+      callback: () {
+        this
+          ..todos.insert(0, todo)
+          ..notifyListeners()
+          ..scrollToStart;
+        analyticsService.logAddTodo(todo);
+      },
     );
   }
 

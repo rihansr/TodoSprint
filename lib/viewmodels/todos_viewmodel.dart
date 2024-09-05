@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '../models/task_model.dart';
 import '../models/todo_model.dart';
@@ -27,9 +28,8 @@ class TodosViewModel extends ChangeNotifier {
   set page(int i) => pageController.jumpToPage(i);
 
   removeTodo(Todo todo) {
-    this
-      ..todos.remove(todo)
-      ..notifyListeners();
+    todos.remove(todo);
+    todos.isEmpty ? context.pop() : notifyListeners();
     _homeProvider
       ..todos.remove(todo)
       ..notify;
