@@ -15,6 +15,8 @@
   "lists": "Lists",
   "save": "Save",
   "cancel": "Cancel",
+  "edit": "Edit",
+  "delete": "Delete",
   "okay": "Okay",
   "retry": "Retry",
   "tasksCount": "{count} of {total} tasks",

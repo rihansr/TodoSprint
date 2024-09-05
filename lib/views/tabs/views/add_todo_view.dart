@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../models/theme_model.dart';
 import '../../../models/todo_model.dart';
-import '../../../services/navigation_service.dart';
 import '../../../shared/strings.dart';
 import '../../../shared/styles.dart';
+import '../../../shared/utils.dart';
 import '../../../widgets/color_picker.dart';
 import '../../../widgets/input_widget.dart';
 
 popupTodoEditor({
   required BuildContext context,
   Todo? todo,
-  void Function(Todo task)? listener,
+  void Function(Todo todo)? listener,
 }) {
   showCupertinoModalPopup(
     context: context,
@@ -71,7 +71,7 @@ class _AddTodoViewState extends State<_AddTodoView> {
         title: _titleController.text.trim(),
         description: _descriptionController.text.trim(),
         theme: (_todo?.theme ?? const TodoTheme()).copyWith(
-          color: themeColor ?? Theme.of(navigator.context).colorScheme.primary,
+          color: themeColor ?? utils.randomColor,
         ),
         timestamp: DateTime.now(),
         tasks: _todo?.tasks ?? [],
@@ -140,7 +140,7 @@ class _AddTodoViewState extends State<_AddTodoView> {
                     controller: _titleController,
                     hints: string.titleHint,
                     maxLines: 1,
-                    autoFocus: _todo?.title == null,
+                    autoFocus: true,
                     keyboardType: TextInputType.name,
                     textCapitalization: TextCapitalization.words,
                     onFieldSubmitted: (_) => _save(),
@@ -154,7 +154,6 @@ class _AddTodoViewState extends State<_AddTodoView> {
                     minLines: 4,
                     maxLines: 14,
                     keyboardType: TextInputType.multiline,
-                    autoFocus: _todo?.description == null,
                     textCapitalization: TextCapitalization.sentences,
                   ),
                   const SizedBox(height: 16),

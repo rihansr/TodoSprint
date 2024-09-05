@@ -61,6 +61,18 @@ ThemeData theming(ThemeMode mode) {
         color: colorPalette.headline,
       ),
     ),
+    popupMenuTheme: const PopupMenuThemeData().copyWith(
+      color: colorPalette.surface,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      textStyle: TextStyle(
+        fontSize: 14,
+        color: colorPalette.paragraph,
+        fontWeight: FontWeight.w400,
+        overflow: TextOverflow.ellipsis,
+      ),
+    ),
     checkboxTheme: const CheckboxThemeData().copyWith(
       visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
       side: BorderSide(color: colorPalette.outline),

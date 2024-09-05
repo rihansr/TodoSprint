@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../../models/task_model.dart';
 import '../../../models/todo_model.dart';
 import '../../../shared/utils.dart';
@@ -6,6 +7,7 @@ import '../../../shared/utils.dart';
 class TaskItem extends StatelessWidget {
   final Todo todo;
   final Task task;
+  final Function(Task item)? onChecked;
   final Function(Task item)? onSelected;
   final bool _isSmaller;
 
@@ -13,6 +15,7 @@ class TaskItem extends StatelessWidget {
     super.key,
     required this.todo,
     required this.task,
+    this.onChecked,
     this.onSelected,
   }) : _isSmaller = false;
 
@@ -20,7 +23,8 @@ class TaskItem extends StatelessWidget {
     super.key,
     required this.todo,
     required this.task,
-  })  : onSelected = null,
+  })  : onChecked = null,
+        onSelected = null,
         _isSmaller = true;
 
   @override
@@ -32,7 +36,7 @@ class TaskItem extends StatelessWidget {
     return _isSmaller
         ? ListTile(
             visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
-            contentPadding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+            contentPadding: const EdgeInsets.fromLTRB(6, 0, 6, 0),
             dense: true,
             minLeadingWidth: 0,
             leading: Transform.scale(
@@ -62,10 +66,15 @@ class TaskItem extends StatelessWidget {
         : ListTile(
             contentPadding: const EdgeInsets.fromLTRB(32, 0, 16, 0),
             splashColor: todo.theme.color?.withOpacity(0.2),
-            onTap: () => onSelected?.call(
-              task.copyWith(isCompleted: !task.isCompleted),
-            ),
-            leading: Align(
+            onTap: () {
+              onChecked?.call(
+                task.copyWith(isCompleted: !task.isCompleted),
+              );
+              HapticFeedback.lightImpact();
+            },
+            onLongPress: () => onSelected?.call(task),
+            leading: AnimatedAlign(
+              duration: const Duration(milliseconds: 200),
               alignment: task.timestamp != null
                   ? Alignment.topLeft
                   : Alignment.centerLeft,

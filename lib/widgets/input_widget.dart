@@ -43,7 +43,7 @@ class InputField extends StatelessWidget {
           unfocusOnTapOutside ? (_) => FocusScope.of(context).unfocus() : null,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: InputDecoration(
-        fillColor: theme.disabledColor,
+        fillColor: theme.dividerColor,
         filled: true,
         hintText: hints,
         enabledBorder: border,

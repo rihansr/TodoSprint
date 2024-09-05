@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:todo_sprint/shared/dimens.dart';
 import '../../../models/task_model.dart';
 import '../../../models/todo_model.dart';
 import '../../../services/notification_service.dart';
@@ -68,10 +69,24 @@ class _AddTaskViewState extends State<_AddTaskView> {
     }
   }
 
-  popupDatePicker() => CupertinoDatePicker(
-        mode: CupertinoDatePickerMode.dateAndTime,
-        initialDateTime: _timestamp ?? DateTime.now(),
-        onDateTimeChanged: (dateTime) => timestamp = dateTime,
+  popupDatePicker() => showCupertinoModalPopup(
+        context: context,
+        builder: (context) => Dialog(
+          alignment: Alignment.bottomCenter,
+          insetPadding: const EdgeInsets.all(0),
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+          ),
+          child: SizedBox(
+            height: dimen.height * 0.3,
+            child: CupertinoDatePicker(
+              mode: CupertinoDatePickerMode.dateAndTime,
+              initialDateTime: _timestamp ?? DateTime.now(),
+              onDateTimeChanged: (dateTime) => timestamp = dateTime,
+            ),
+          ),
+        ),
       );
 
   set timestamp(DateTime? timestamp) => setState(() => _timestamp = timestamp);
@@ -170,10 +185,7 @@ class _AddTaskViewState extends State<_AddTaskView> {
               ? Padding(
                   padding: const EdgeInsets.fromLTRB(8, 0, 0, 16),
                   child: IconButton(
-                    onPressed: () => showCupertinoDialog(
-                      context: context,
-                      builder: (context) => popupDatePicker(),
-                    ),
+                    onPressed: () => popupDatePicker(),
                     icon: const Icon(Iconsax.notification),
                   ),
                 )

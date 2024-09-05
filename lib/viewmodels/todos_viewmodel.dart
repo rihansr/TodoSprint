@@ -6,7 +6,7 @@ import 'home_viewmodel.dart';
 
 class TodosViewModel extends ChangeNotifier {
   final BuildContext context;
-  final HomeViewModel homeProvider;
+  final HomeViewModel _homeProvider;
   void Function(Task task)? addTaskListener;
   late PageController pageController;
   List<Todo> todos = const [];
@@ -19,12 +19,21 @@ class TodosViewModel extends ChangeNotifier {
     required this.todo,
     required int index,
   })  : pageController = PageController(initialPage: index),
-        homeProvider = Provider.of<HomeViewModel>(context, listen: false),
+        _homeProvider = Provider.of<HomeViewModel>(context, listen: false),
         index = ValueNotifier<int>(index) {
-    todos = homeProvider.todos;
+    todos = _homeProvider.todos;
   }
 
   set page(int i) => pageController.jumpToPage(i);
 
-  refreshTodo(Todo todo) => homeProvider.resetTodo(todo);
+  removeTodo(Todo todo) {
+    this
+      ..todos.remove(todo)
+      ..notifyListeners();
+    _homeProvider
+      ..todos.remove(todo)
+      ..notify;
+  }
+
+  refreshTodo(Todo todo) => _homeProvider.resetTodo(todo);
 }

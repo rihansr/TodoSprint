@@ -4,7 +4,6 @@ import '../models/todo_model.dart';
 import '../routing/routes.dart';
 import '../services/firestore_service.dart';
 import '../services/navigation_service.dart';
-import '../services/notification_service.dart';
 
 class HomeViewModel extends ChangeNotifier {
   final BuildContext context;
@@ -24,27 +23,18 @@ class HomeViewModel extends ChangeNotifier {
         );
   }
 
-  Future<void> deleteTodo(Todo todo) async {
-    await firestoreService.todosReference.doc(todo.id).delete().then((_) => this
-      ..todos.remove(todo)
-      ..notifyListeners());
-    await notificationService.cancelNotification(
-      todo.tasks
-          .where((task) => task.timestamp != null)
-          .map((task) => task.id)
-          .toList(),
-    );
-  }
+  get notify => notifyListeners();
 
   Future<void> addTodo(Todo todo) async {
     final reference = firestoreService.todosReference;
     todo = todo.copyWith(id: reference.doc().id);
-    await reference.doc(todo.id).set(todo.toMap()).then(
-          (_) => this
-            ..todos.insert(0, todo)
-            ..notifyListeners()
-            ..scrollToStart,
-        );
+    await firestoreService.call(
+      reference.doc(todo.id).set(todo.toMap()),
+      () => this
+        ..todos.insert(0, todo)
+        ..notifyListeners()
+        ..scrollToStart,
+    );
   }
 
   get scrollToStart => scrollController.animateTo(

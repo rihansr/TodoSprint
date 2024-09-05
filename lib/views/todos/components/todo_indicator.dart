@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../../models/todo_model.dart';
 
 class TodoIndicator extends StatelessWidget {
@@ -25,7 +26,12 @@ class TodoIndicator extends StatelessWidget {
         itemBuilder: (context, i) {
           final todo = todos[i];
           return InkWell(
-            onTap: () => onSelected?.call(i),
+            onTap: onSelected != null
+                ? () {
+                    onSelected?.call(i);
+                    HapticFeedback.lightImpact();
+                  }
+                : null,
             splashColor: Colors.transparent,
             child: Hero(
               tag: "${todo.id}_$currentIndex",

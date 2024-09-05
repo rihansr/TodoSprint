@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '../../models/todo_model.dart';
 import '../../viewmodels/todos_viewmodel.dart';
+import '../../widgets/app_bar_widget.dart';
 import 'components/add_task_button.dart';
 import 'components/todo_indicator.dart';
 import 'views/add_task_view.dart';
@@ -23,10 +24,15 @@ class TodosView extends StatelessWidget {
       value: TodosViewModel(context, todo: todo, index: index),
       child: Consumer<TodosViewModel>(
         builder: (context, controller, _) => Scaffold(
-          appBar: AppBar(
-            key: const Key('todos_app_bar'),
-            leading: const Icon(
-              Iconsax.menu,
+          appBar: CustomAppBar(
+            onTapLeading: () => context.pop(),
+            leading: Hero(
+              tag: 'app_bar_leading',
+              child: Icon(
+                Icons.arrow_back_ios_new_outlined,
+                size: 20,
+                color: Theme.of(context).iconTheme.color,
+              ),
             ),
           ),
           body: PageView.builder(
@@ -44,6 +50,7 @@ class TodosView extends StatelessWidget {
                 key: PageStorageKey(todo.id),
                 todo: todo,
                 onUpdate: controller.refreshTodo,
+                onRemove: controller.removeTodo,
                 listener: (onAddTask) => controller.addTaskListener = onAddTask,
               );
             },

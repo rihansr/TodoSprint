@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../../models/todo_model.dart';
 import 'task_item.dart';
 
@@ -6,28 +7,29 @@ class TodoItem extends StatelessWidget {
   final Todo todo;
   final int index;
   final Function(Todo item) onSelected;
-  final Function(Todo item)? onAction;
 
   const TodoItem({
     super.key,
     required this.todo,
     required this.index,
     required this.onSelected,
-    this.onAction,
   });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Hero(
-    tag: "${todo.id}_$index",
+      tag: "${todo.id}_$index",
       child: Card(
         color: todo.theme.color,
         shadowColor: todo.theme.color,
         child: InkWell(
-          onTap: () => onSelected.call(todo),
-          onLongPress: () => onAction?.call(todo),
+          onTap: () {
+            onSelected.call(todo);
+            HapticFeedback.lightImpact();
+          },
           borderRadius: BorderRadius.circular(5),
+          highlightColor: Colors.transparent,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -49,12 +51,12 @@ class TodoItem extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              const Divider(indent: 16),
+              const Divider(indent: 38.5),
               Expanded(
                 flex: 6,
                 child: ListView.builder(
                   physics: const BouncingScrollPhysics(),
-                  padding: const EdgeInsets.fromLTRB(0, 16, 0, 8),
+                  padding: const EdgeInsets.fromLTRB(0, 14, 0, 8),
                   itemCount: todo.tasks.length,
                   itemBuilder: (context, i) {
                     final task = todo.tasks[i];

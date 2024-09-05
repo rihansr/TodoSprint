@@ -1,39 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:iconsax/iconsax.dart';
+import '../../../widgets/neomorphic_widget.dart';
 
 class AddTaskButton extends StatelessWidget {
   final Color? color;
-  final Function()? onPressed;
+  final Function() onPressed;
 
   const AddTaskButton({
     super.key,
     this.color,
-    this.onPressed,
+    required this.onPressed,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onPressed,
+      onTap: () {
+        onPressed.call();
+        HapticFeedback.lightImpact();
+      },
       borderRadius: BorderRadius.circular(8),
-      child: AnimatedContainer(
+      child: Neomorphic(
         height: 48,
         width: 48,
-        duration: const Duration(milliseconds: 400),
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.circular(8),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 12,
-              offset: const Offset(0, 4),
-            ),
-          ],
-        ),
+        borderRadius: 8,
+        backgroundColor: color,
         child: const Icon(
           Iconsax.add,
-          size: 24,
           color: Colors.white,
         ),
       ),

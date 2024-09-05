@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../../viewmodels/home_viewmodel.dart';
 import '../../widgets/base_widget.dart';
 import '../todos/components/todo_item.dart';
-import 'components/add_list_button.dart';
+import 'components/add_todo_button.dart';
 import 'components/todos_header.dart';
 import 'views/add_todo_view.dart';
 
@@ -21,7 +21,7 @@ class HomeTabView extends StatelessWidget {
         children: [
           const TodosHeader(key: Key('todos_header')),
           const Spacer(flex: 2, key: Key('header_spacer')),
-          AddListButton(
+          AddTodoButton(
             onTap: () => popupTodoEditor(
               context: context,
               listener: (todo) async => controller.addTodo(todo),
@@ -30,7 +30,7 @@ class HomeTabView extends StatelessWidget {
           const Spacer(flex: 4, key: Key('button_spacer')),
           Expanded(
             key: const Key('todos_grid'),
-            flex: 10,
+            flex: 11,
             child: GridView.builder(
               controller: controller.scrollController,
               physics: const BouncingScrollPhysics(),
@@ -48,7 +48,6 @@ class HomeTabView extends StatelessWidget {
                   todo: todo,
                   index: i,
                   onSelected: (item) => controller.navigateTo(item, i),
-                  onAction: (item) => controller.deleteTodo(item),
                 );
               },
             ),

@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../configs/app_settings.dart';
 
-final extension = Utils.value;
+final utils = Utils.value;
 
 class Utils {
   static Utils get value => Utils._();
   Utils._();
 
-  Color get randomColor => Colors.primaries[Random().nextInt(Colors.primaries.length)];
+  Color get randomColor =>
+      Colors.primaries[Random().nextInt(Colors.primaries.length)];
 }
 
 extension HexColorExtension on String {
