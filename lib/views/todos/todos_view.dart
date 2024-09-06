@@ -78,6 +78,7 @@ class TodosView extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(right: 16),
                         child: AddTaskButton(
+                          key: const Key('add_task_button'),
                           color: todo.theme.color,
                           onPressed: () => showTaskEditor(
                             context: context,

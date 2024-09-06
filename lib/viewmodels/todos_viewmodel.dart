@@ -22,11 +22,17 @@ class TodosViewModel extends ChangeNotifier {
   })  : pageController = PageController(initialPage: index),
         _homeProvider = Provider.of<HomeViewModel>(context, listen: false),
         index = ValueNotifier<int>(index) {
-    todos = _homeProvider.todos;
+    todos = List.from(_homeProvider.todos);
   }
 
+  /// Sets the current page of the PageController.
   set page(int i) => pageController.jumpToPage(i);
 
+  /// Removes a todo item from the list.
+  ///
+  /// If the list becomes empty after removal, it navigates back to landing page.
+  /// Otherwise, it notifies listeners about the change.
+  /// Also removes the todo from the HomeViewModel and notifies it.
   removeTodo(Todo todo) {
     todos.remove(todo);
     todos.isEmpty ? context.pop() : notifyListeners();
@@ -35,5 +41,14 @@ class TodosViewModel extends ChangeNotifier {
       ..notify;
   }
 
-  refreshTodo(Todo todo) => _homeProvider.resetTodo(todo);
+  /// Refreshes a todo item in the list.
+  ///
+  /// Finds the index of the todo item in the list and updates it.
+  /// Notifies listeners about the change and resets the todo in the HomeViewModel.
+  refreshTodo(Todo todo) {
+    final index = todos.indexWhere((item) => item == todo);
+    todos[index] = todo;
+    notifyListeners();
+    _homeProvider.resetTodo(todo);
+  }
 }

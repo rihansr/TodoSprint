@@ -1,7 +1,7 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:todo_sprint/services/auth_service.dart';
 import '../models/task_model.dart';
 import '../models/todo_model.dart';
+import 'auth_service.dart';
 
 final AnalyticsService analyticsService = AnalyticsService.value;
 

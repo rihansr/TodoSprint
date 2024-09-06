@@ -17,7 +17,7 @@ showTodoEditor({
   showCupertinoModalPopup(
     context: context,
     filter: style.defaultBlur,
-    builder: (context) => _AddTodoView(
+    builder: (context) => AddTodoView(
       key: const Key('add_todo_view'),
       todo: todo,
     ),
@@ -26,19 +26,19 @@ showTodoEditor({
   });
 }
 
-class _AddTodoView extends StatefulWidget {
+class AddTodoView extends StatefulWidget {
   final Todo? todo;
 
-  const _AddTodoView({
+  const AddTodoView({
     super.key,
     this.todo,
   });
 
   @override
-  State<_AddTodoView> createState() => _AddTodoViewState();
+  State<AddTodoView> createState() => _AddTodoViewState();
 }
 
-class _AddTodoViewState extends State<_AddTodoView> {
+class _AddTodoViewState extends State<AddTodoView> {
   late Todo? _todo;
   late GlobalKey<FormState> _formKey;
   bool disableSaveOption = false;
@@ -106,6 +106,7 @@ class _AddTodoViewState extends State<_AddTodoView> {
         children: [
           ListTile(
             leading: TextButton(
+              key: const Key('todo_cancel_text_button'),
               onPressed: () => context.pop(),
               child: Text(
                 string.cancel,
@@ -118,6 +119,7 @@ class _AddTodoViewState extends State<_AddTodoView> {
               textAlign: TextAlign.center,
             ),
             trailing: TextButton(
+              key: const Key('todo_save_text_button'),
               onPressed: () => _save(),
               child: Text(
                 string.save,
@@ -137,6 +139,7 @@ class _AddTodoViewState extends State<_AddTodoView> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   InputField(
+                    key: const Key('todo_title_input_field'),
                     controller: _titleController,
                     hints: string.titleHint,
                     maxLines: 1,
@@ -149,6 +152,7 @@ class _AddTodoViewState extends State<_AddTodoView> {
                   ),
                   const SizedBox(height: 8),
                   InputField(
+                    key: const Key('todo_description_input_field'),
                     controller: _descriptionController,
                     hints: string.descriptionHint,
                     minLines: 4,

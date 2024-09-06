@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:todo_sprint/shared/debug.dart';
 import 'analytics_service.dart';
 
 final authService = AuthService.value;
@@ -18,7 +17,6 @@ class AuthService {
           final credentials = await _auth.signInAnonymously();
           return credentials.user;
         }());
-    debug.print(user);
     analyticsService.setUser(user?.uid);
   }
 }

@@ -29,8 +29,8 @@ class LandingView extends StatelessWidget {
         body: IndexedStack(
           index: controller.selectedTab,
           children: const [
-            HomeTabView(),
-            SettingsTabView(),
+            HomeTabView(key: PageStorageKey('HomeTabView')),
+            SettingsTabView(key: PageStorageKey('SettingsTabView')),
           ],
         ),
         bottomNavigationBar: SizedBox(
@@ -41,11 +41,13 @@ class LandingView extends StatelessWidget {
             onTap: (i) => controller.selectedTab = i,
             items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
+                key: const Key('home_tab'),
                 icon: const Icon(Iconsax.task_square),
                 activeIcon: const Icon(Iconsax.task_square5),
                 label: string.todos,
               ),
               BottomNavigationBarItem(
+                key: const Key('settings_tab'),
                 icon: const Icon(Iconsax.setting_44),
                 activeIcon: const Icon(Iconsax.setting_45),
                 label: string.settings,

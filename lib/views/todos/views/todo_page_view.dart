@@ -56,8 +56,27 @@ class TodoPage extends StatelessWidget {
                 ),
               ),
               horizontalTitleGap: 0,
-              title: Text(controller.todo.title),
-              titleTextStyle: theme.textTheme.headlineMedium,
+              title: Tooltip(
+                message: controller.todo.description ?? '',
+                child: RichText(
+                  text: TextSpan(
+                    text: controller.todo.title,
+                    style: theme.textTheme.headlineMedium,
+                    children: controller.todo.description?.isEmpty ?? true
+                        ? null
+                        : [
+                            WidgetSpan(
+                              child: Icon(
+                                Icons.info,
+                                size: 16,
+                                color: theme.disabledColor,
+                              ),
+                              alignment: PlaceholderAlignment.top,
+                            )
+                          ],
+                  ),
+                ),
+              ),
               subtitle: Text(
                 string.tasksCount(
                     controller.todo.completionCount, controller.todo.count),
@@ -68,6 +87,7 @@ class TodoPage extends StatelessWidget {
                 widthFactor: 1,
                 heightFactor: .5,
                 child: PopupMenuButton(
+                  key: const Key('todo_actions_popup_menu_button'),
                   onSelected: (value) {
                     switch (value) {
                       case 'edit':
@@ -94,6 +114,7 @@ class TodoPage extends StatelessWidget {
                       },
                     }.entries.map(
                           (e) => PopupMenuItem(
+                            key: Key('${e.key}_key'),
                             value: e.key,
                             child: Row(
                               children: [

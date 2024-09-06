@@ -16,7 +16,9 @@ class NotificationService {
 
   Future<void> init() async {
     tz.initializeTimeZones();
+  }
 
+  Future<void> checkPermission() async {
     if (defaultTargetPlatform == TargetPlatform.android) {
       await flutterLocalNotificationsPlugin
           .resolvePlatformSpecificImplementation<

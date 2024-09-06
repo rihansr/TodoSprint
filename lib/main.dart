@@ -11,7 +11,7 @@ import 'routing/routing.dart';
 import 'services/navigation_service.dart';
 
 Future<void> main() async =>
-    appConfig.init().then((_) => runApp(const MyApp()));
+    await appConfig.init().then((_) => runApp(const MyApp()));
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

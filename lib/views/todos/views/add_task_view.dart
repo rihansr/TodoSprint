@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:todo_sprint/shared/dimens.dart';
 import '../../../models/task_model.dart';
 import '../../../models/todo_model.dart';
 import '../../../services/notification_service.dart';
+import '../../../shared/dimens.dart';
 import '../../../shared/strings.dart';
 import '../../../shared/styles.dart';
 import '../../../shared/utils.dart';
@@ -21,7 +21,7 @@ showTaskEditor({
   showCupertinoModalPopup(
     context: context,
     filter: style.defaultBlur,
-    builder: (context) => _AddTaskView(
+    builder: (context) => AddTaskView(
       key: const Key('add_task_view'),
       todo: todo,
       task: task,
@@ -31,21 +31,21 @@ showTaskEditor({
   });
 }
 
-class _AddTaskView extends StatefulWidget {
+class AddTaskView extends StatefulWidget {
   final Todo? todo;
   final Task? task;
 
-  const _AddTaskView({
+  const AddTaskView({
     super.key,
     this.todo,
     this.task,
   });
 
   @override
-  State<_AddTaskView> createState() => _AddTaskViewState();
+  State<AddTaskView> createState() => _AddTaskViewState();
 }
 
-class _AddTaskViewState extends State<_AddTaskView> {
+class _AddTaskViewState extends State<AddTaskView> {
   late Task? _task;
   late GlobalKey<FormState> _formKey;
   bool disableSaveOption = false;
@@ -69,21 +69,23 @@ class _AddTaskViewState extends State<_AddTaskView> {
     }
   }
 
-  popupDatePicker() => showCupertinoModalPopup(
-        context: context,
-        builder: (context) => Dialog(
-          alignment: Alignment.bottomCenter,
-          insetPadding: const EdgeInsets.all(0),
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-          ),
-          child: SizedBox(
-            height: dimen.height * 0.3,
-            child: CupertinoDatePicker(
-              mode: CupertinoDatePickerMode.dateAndTime,
-              initialDateTime: _timestamp ?? DateTime.now(),
-              onDateTimeChanged: (dateTime) => timestamp = dateTime,
+  popupDatePicker() => notificationService.checkPermission().then(
+        (_) => showCupertinoModalPopup(
+          context: context,
+          builder: (context) => Dialog(
+            alignment: Alignment.bottomCenter,
+            insetPadding: const EdgeInsets.all(0),
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+            ),
+            child: SizedBox(
+              height: dimen.height * 0.3,
+              child: CupertinoDatePicker(
+                mode: CupertinoDatePickerMode.dateAndTime,
+                initialDateTime: _timestamp ?? DateTime.now(),
+                onDateTimeChanged: (dateTime) => timestamp = dateTime,
+              ),
             ),
           ),
         ),
@@ -104,12 +106,12 @@ class _AddTaskViewState extends State<_AddTaskView> {
       }
       if (_timestamp != null) {
         await notificationService.schedule(
-            task.id,
-            _timestamp!,
-            DateTimeComponents.dateAndTime,
-            title: widget.todo?.title ?? 'Reminder',
-            body: task.name,
-          );
+          task.id,
+          _timestamp!,
+          DateTimeComponents.dateAndTime,
+          title: widget.todo?.title ?? 'Reminder',
+          body: task.name,
+        );
       }
       context.pop(task);
     }
@@ -140,6 +142,7 @@ class _AddTaskViewState extends State<_AddTaskView> {
         children: [
           ListTile(
             leading: TextButton(
+              key: const Key('task_cancel_text_button'),
               onPressed: () => context.pop(),
               child: Text(
                 string.cancel,
@@ -152,6 +155,7 @@ class _AddTaskViewState extends State<_AddTaskView> {
               textAlign: TextAlign.center,
             ),
             trailing: TextButton(
+              key: const Key('task_save_text_button'),
               onPressed: () => _save(),
               child: Text(
                 string.save,
@@ -168,6 +172,7 @@ class _AddTaskViewState extends State<_AddTaskView> {
             child: Padding(
               padding: const EdgeInsets.fromLTRB(24, 16, 24, 8),
               child: InputField(
+                key: const Key('task_name_input_field'),
                 controller: _taskController,
                 maxLines: 14,
                 autoFocus: true,

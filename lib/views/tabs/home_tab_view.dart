@@ -29,6 +29,7 @@ class HomeTabView extends StatelessWidget {
           ),
           const Spacer(flex: 2, key: Key('header_spacer')),
           AddTodoButton(
+            key: const Key('add_todo_button'),
             onTap: () => showTodoEditor(
               context: context,
               listener: (todo) async => controller.addTodo(todo),
@@ -36,7 +37,6 @@ class HomeTabView extends StatelessWidget {
           ),
           const Spacer(flex: 4, key: Key('button_spacer')),
           Expanded(
-            key: const Key('todos_grid'),
             flex: 11,
             child: IndexedStack(
               index: controller.todos.isEmpty ? 0 : 1,
@@ -48,6 +48,7 @@ class HomeTabView extends StatelessWidget {
                   ),
                 ),
                 GridView.builder(
+                  key: const Key('todos_grid'),
                   controller: controller.scrollController,
                   physics: const BouncingScrollPhysics(),
                   padding: const EdgeInsets.symmetric(horizontal: 26),

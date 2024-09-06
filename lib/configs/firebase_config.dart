@@ -19,7 +19,7 @@ class FirebaseConfig {
           )
         : Firebase.app();
 
-    Future.wait([
+    await Future.wait([
       analyticsService.init(),
       authService.init(),
     ]);
@@ -49,7 +49,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyBzmepPD34VWxZ7-cxulkeahB2FYGEgrc4',
-    appId: '1:406099696497:web:87e25e51afe982cd3574d0',
+    appId: '1:863257218129:ios:2fa7c131420b1912cebc70',
     messagingSenderId: '863257218129',
     projectId: 'todo-sprint-434207',
     authDomain: 'flutterfire-e2e-tests.firebaseapp.com',
@@ -67,7 +67,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyB7zVnXbBBzfcsrvw6LFyijJWz7P3wDB2M',
-    appId: '1:1084669682207:ios:d31df9e1c74d92aec46b2a',
+    appId: '1:863257218129:ios:2fa7c131420b1912cebc70',
     messagingSenderId: '863257218129',
     projectId: 'todo-sprint-434207',
     storageBucket: 'todo-sprint-434207.appspot.com',
@@ -78,7 +78,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyDooSUGSf63Ghq02_iIhtnmwMDs4HlWS6c',
-    appId: '1:406099696497:ios:acd9c8e17b5e620e3574d0',
+    appId: '1:863257218129:ios:2fa7c131420b1912cebc70',
     messagingSenderId: '863257218129',
     projectId: 'todo-sprint-434207',
     storageBucket: 'todo-sprint-434207.appspot.com',

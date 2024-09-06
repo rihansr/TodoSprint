@@ -28,6 +28,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           ? null
           : Center(
               child: IconButton(
+                key: const Key('app_bar_leading_button'),
                 onPressed: onTapLeading,
                 color: theme.iconTheme.color,
                 padding: const EdgeInsets.all(0),
